@@ -15,8 +15,8 @@ const METHODS = Object.freeze(["get", "post", "put", "patch", "delete"])
 /**
  * @param path A path to the directory to translate recursively (usually
  * `src/routes/en`).
- * @param translations A path to a `.json` translation files directory or an
- * array of paths to `.json` translation files.
+ * @param translations An array of paths to `.json` translation files or an
+ * array containing a single path to a translation directory.
  */
 export function translateDirectoryRecursive(
 	path: string,

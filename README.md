@@ -1,84 +1,81 @@
-# tsconfig-multiple-extends
+# qwik-translate-routes
 
-> Extend multiple tsconfigs from a single file.
+> Generate translated routes for your qwik project.
 
 ## Installation
 
 ```
 // npm
-npm install -D tsconfig-multiple-extends
+npm install -D qwik-translate-routes
 // yarn
-yarn add -D tsconfig-multiple-extends
+yarn add -D qwik-translate-routes
 // pnpm
-pnpm add -D tsconfig-multiple-extends
+pnpm add -D qwik-translate-routes
 ```
 
 ## Usage
 
--   Star the [github repo](https://github.com/Alexandre-Fernandez/tsconfig-multiple-extends) 😎
+-   Star the [github repo](https://github.com/Alexandre-Fernandez/qwik-translate-routes) 😎
 
 ### CLI
 
 ```css
-npx tsconfig-multiple-extends [path_to_config] --extends [path_to_extended_config_1] [path_to_extended_config_2]
+npx qwik-translate-routes [path_to_dir] --translations [path_to_translation_dir_or_file]
 ```
 
 ### Module
 
 ```ts
-import { Tsconfig } from "tsconfig-multiple-extends"
+import { translateDirectoryRecursive } from "qwik-translate-routes"
 
-new Tsconfig("./path/to/tsconfig.json")
-	.addExtends("./path/to/extended/tsconfig.json")
-	.addExtends("./path/to/another/extended/tsconfig.json")
-	.save()
+translateDirectoryRecursive("./path/to/dir", [
+	"./path/to/translation/file/or/dir",
+])
 ```
+
+### Translation files
+
+Translation files must be a one level deep `.json` file, using the main directory's directory names as keys and the translation as value.
+
+#### Example
+
+_fr.json_
+
+```json
+{
+	"en": "fr",
+	"about": "a-propos",
+	"products": "produits"
+}
+```
+
+This translation file assumes your target directory is called `en` and has subdirectories (nesting doesn't matter) called `about` and `products`.
 
 ## Reference
 
 ### CLI
 
-| Option      | Shortcut | Argument    | Description                                                                                       |
-| ----------- | -------- | ----------- | ------------------------------------------------------------------------------------------------- |
-| --extends   | -xt      | ...string[] | Sets what tsconfigs should the provided one extend                                                |
-| --save      | -sv      | string      | Sets the output path                                                                              |
-| --noResolve | -nr      | bool        | If present `tsconfig-multiple-extends` won't resolve the extended configs `extends` property.[^1] |
+| Option         | Shortcut | Argument    | Description                                                                                                     |
+| -------------- | -------- | ----------- | --------------------------------------------------------------------------------------------------------------- |
+| --translations | -tr      | ...string[] | Sets what translations will be used to generate the translated directories, either a path to a dir or 1+ files. |
 
 #### Example
 
 ```css
-npx tsconfig-multiple-extends [path_to_config] --xt [path_to_extended_config] -nr -sv [path_to_output]
+npx qwik-translate-routes [path_to_dir] --tr [path_to_italian_translations] [path_to_german_translations]
 ```
 
 ### Module
 
 ```ts
-class Tsconfig {
-	/**
-	 * @param path Path to the `tsconfig.json`.
-	 */
-	constructor(path: string) {}
-
-	/**
-	 * Extends the given `tsconfig.json` with `this`.
-	 * @param path A path to the `tsconfig.json`
-	 * @param resolveExtends If set to true it will also try to add
-	 * all the properties from the extended tsconfigs recursively.
-	 * **WARNING**: This will only works with relative paths.
-	 */
-	addExtends(path: string, resolveExtends = true) {}
-
-	/**
-	 * @returns The JSON corresponding to the current `Tsconfig`.
-	 */
-	toJSON() {}
-
-	/**
-	 * Saves the file as JSON to `path`.
-	 * @param path Equal to the original constructor path by default.
-	 */
-	save(path = this.path) {}
-}
+/**
+ * @param path A path to the directory to translate recursively (usually
+ * `src/routes/en`).
+ * @param translations An array of paths to `.json` translation files or an
+ * array containing a single path to a translation directory.
+ */
+export function translateDirectoryRecursive(
+	path: string,
+	translations: string[]
+) {}
 ```
-
-[^1]: Only resolves relative paths from the extended configs.

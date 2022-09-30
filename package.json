@@ -1,0 +1,42 @@
+{
+	"name": "qwik-translate-routes",
+	"version": "1.0.0",
+	"description": "Generate translated routes for your qwik project.",
+	"author": "alexandre-fernandez",
+	"license": "MIT",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/alexandre-fernandez/qwik-translate-routes"
+	},
+	"keywords": [
+		"qwik",
+		"route",
+		"url",
+		"translation",
+		"routing",
+		"internationalisation",
+		"localisation",
+		"generator"
+	],
+	"bin": "./dist/bin/index.js",
+	"main": "./dist/index.js",
+	"types": "./dist/index.d.ts",
+	"files": [
+		"/dist"
+	],
+	"scripts": {
+		"lint": "eslint --ignore-path .eslintignore .",
+		"build": "pnpm lint && tsc",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"devDependencies": {
+		"@types/node": "^18.7.18",
+		"@typescript-eslint/eslint-plugin": "^5.37.0",
+		"@typescript-eslint/parser": "^5.37.0",
+		"eslint": "^8.23.1",
+		"eslint-config-airbnb-base": "^15.0.0",
+		"eslint-config-prettier": "^8.5.0",
+		"eslint-plugin-import": "^2.26.0",
+		"typescript": "^4.8.3"
+	}
+}

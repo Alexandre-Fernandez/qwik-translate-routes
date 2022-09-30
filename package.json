@@ -1,6 +1,6 @@
 {
 	"name": "qwik-translate-routes",
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"description": "Generate translated routes for your qwik project.",
 	"author": "alexandre-fernandez",
 	"license": "MIT",
